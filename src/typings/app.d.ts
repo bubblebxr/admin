@@ -466,6 +466,11 @@ declare namespace App {
           projectCount: string;
           todo: string;
           message: string;
+          flowRate:string;
+          thisWeek:string;
+          lastWeek:string;
+          lastWeekFlowRate:string;
+          lastLastWeekFlowRate:string;
           downloadCount: string;
           registerCount: string;
           schedule: string;
@@ -542,6 +547,10 @@ declare namespace App {
         };
         manage: {
           common: {
+            equipmentStatus: {
+              enable: string;
+              disable: string;
+            },
             status: {
               enable: string;
               disable: string;
@@ -549,20 +558,50 @@ declare namespace App {
           };
           role: {
             title: string;
-            roleName: string;
-            roleCode: string;
-            roleStatus: string;
-            roleDesc: string;
+            equipmentName: string;
+            equipmentType: string;
+            equipmentStatus: string;
+            IP: string;
             form: {
-              roleName: string;
-              roleCode: string;
-              roleStatus: string;
-              roleDesc: string;
+              equipmentName: string;
+              equipmentType: string;
+              equipmentStatus: string;
+              IP: string;
+            };
+            Type: {
+              light:string;
+              vehicle: string;
+              trafficLight: string;
             };
             addRole: string;
             editRole: string;
             menuAuth: string;
             buttonAuth: string;
+          };
+          diary: {
+            title: string;
+            equipmentName: string;
+            type: string;
+            IP: string;
+            detectTime: string;
+            location: string;
+            Status: string;
+            form: {
+              userName: string;
+              userGender: string;
+              nickName: string;
+              userPhone: string;
+              userEmail: string;
+              userStatus: string;
+              userRole: string;
+            };
+            addUser: string;
+            editUser: string;
+            Type: {
+              light: string;
+              vehicle: string;
+              trafficLight:string;
+            };
           };
           user: {
             title: string;

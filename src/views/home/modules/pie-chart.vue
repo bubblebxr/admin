@@ -101,6 +101,7 @@ init();
 </script>
 
 <template>
+  <div style="font-size:17px;text-align: center; font-weight: bold;">常见攻击占比</div>
   <NCard :bordered="false" class="card-wrapper">
     <div ref="domRef" class="h-360px overflow-hidden"></div>
   </NCard>

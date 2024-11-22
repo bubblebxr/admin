@@ -4,7 +4,7 @@ import { fetchGetRoleList } from '@/service/api';
 import { useAppStore } from '@/store/modules/app';
 import { useTable, useTableOperate } from '@/hooks/common/table';
 import { $t } from '@/locales';
-import { enableStatusRecord } from '@/constants/business';
+import { userTypeRecord,enableStatusRecord } from '@/constants/business';
 import RoleOperateDrawer from './modules/role-operate-drawer.vue';
 import RoleSearch from './modules/role-search.vue';
 
@@ -45,24 +45,39 @@ const {
     },
     {
       key: 'roleName',
-      title: $t('page.manage.role.roleName'),
+      title: $t('page.manage.role.equipmentName'),
       align: 'center',
       minWidth: 120
     },
     {
       key: 'roleCode',
-      title: $t('page.manage.role.roleCode'),
+      title: $t('page.manage.role.equipmentType'),
       align: 'center',
-      minWidth: 120
+      width: 100,
+      render: row => {
+        if (row.status === null) {
+          return null;
+        }
+
+        const tagMap: Record<Api.SystemManage.equipmentType, NaiveUI.ThemeColor> = {
+          1: 'success',
+          2: 'warning',
+          3:'default',
+        };
+
+        const label = $t(userTypeRecord[row.status]);
+
+        return <NTag type={tagMap[row.status]}>{label}</NTag>;
+      }
     },
     {
       key: 'roleDesc',
-      title: $t('page.manage.role.roleDesc'),
+      title: $t('page.manage.role.IP'),
       minWidth: 120
     },
     {
       key: 'status',
-      title: $t('page.manage.role.roleStatus'),
+      title: $t('page.manage.role.equipmentStatus'),
       align: 'center',
       width: 100,
       render: row => {

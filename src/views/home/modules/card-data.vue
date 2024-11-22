@@ -35,12 +35,13 @@ const cardData = computed<CardData[]>(() => [
     key: 'turnover',
     title: $t('page.home.turnover'),
     value: 1026,
-    unit: '$',
+    unit: '',
     color: {
       start: '#865ec0',
       end: '#5144b4'
     },
-    icon: 'ant-design:money-collect-outlined'
+    // icon: 'ant-design:money-collect-outlined'
+    icon: 'ant-design:bar-chart-outlined'
   },
   {
     key: 'downloadCount',
@@ -51,7 +52,8 @@ const cardData = computed<CardData[]>(() => [
       start: '#56cdf3',
       end: '#719de3'
     },
-    icon: 'carbon:document-download'
+    // icon: 'carbon:document-download'
+    icon: 'ant-design:bar-chart-outlined'
   },
   {
     key: 'dealCount',
@@ -62,7 +64,8 @@ const cardData = computed<CardData[]>(() => [
       start: '#fcbc25',
       end: '#f68057'
     },
-    icon: 'ant-design:trademark-circle-outlined'
+    // icon: 'ant-design:trademark-circle-outlined'
+    icon: 'ant-design:bar-chart-outlined'
   }
 ]);
 
@@ -80,6 +83,7 @@ function getGradientColor(color: CardData['color']) {
 <template>
   <NCard :bordered="false" size="small" class="card-wrapper">
     <!-- define component start: GradientBg -->
+    <div style="font-size:20px;text-align: center; font-weight: bold;margin-bottom:5px;">今日流量分析</div>
     <DefineGradientBg v-slot="{ $slots, gradientColor }">
       <div class="rd-8px px-16px pb-4px pt-8px text-white" :style="{ backgroundImage: gradientColor }">
         <component :is="$slots.default" />
@@ -93,12 +97,8 @@ function getGradientColor(color: CardData['color']) {
           <h3 class="text-16px">{{ item.title }}</h3>
           <div class="flex justify-between pt-12px">
             <SvgIcon :icon="item.icon" class="text-32px" />
-            <CountTo
-              :prefix="item.unit"
-              :start-value="1"
-              :end-value="item.value"
-              class="text-30px text-white dark:text-dark"
-            />
+            <CountTo :prefix="item.unit" :start-value="1" :end-value="item.value"
+              class="text-30px text-white dark:text-dark" />
           </div>
         </GradientBg>
       </NGi>

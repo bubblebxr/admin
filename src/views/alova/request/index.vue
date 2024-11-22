@@ -36,7 +36,7 @@ async function handleRepeatedModalError() {
 
 <template>
   <NSpace vertical :size="16">
-    <NCard :title="$t('request.logout')" :bordered="false" size="small" segmented class="card-wrapper">
+    <!-- <NCard :title="$t('request.logout')" :bordered="false" size="small" segmented class="card-wrapper">
       <NButton @click="logout">{{ $t('common.trigger') }}</NButton>
     </NCard>
     <NCard :title="$t('request.logoutWithModal')" :bordered="false" size="small" segmented class="card-wrapper">
@@ -56,7 +56,8 @@ async function handleRepeatedModalError() {
       <NButton class="ml-12px" @click="handleRepeatedModalError">
         {{ $t('page.function.request.repeatedError') }}(Modal)
       </NButton>
-    </NCard>
+    </NCard> -->
+    
   </NSpace>
 </template>
 

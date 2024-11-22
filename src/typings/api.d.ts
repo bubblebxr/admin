@@ -122,6 +122,8 @@ declare namespace Api {
      */
     type UserGender = '1' | '2';
 
+    type equipmentType='1'|'2'|'3';
+
     /** user */
     type User = Common.CommonRecord<{
       /** user name */

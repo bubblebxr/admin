@@ -23,18 +23,13 @@ const statisticData = computed<StatisticData[]>(() => [
   {
     id: 0,
     label: $t('page.home.projectCount'),
-    value: '25'
+    value: '148'
   },
   {
     id: 1,
     label: $t('page.home.todo'),
-    value: '4/16'
+    value: '5'
   },
-  {
-    id: 2,
-    label: $t('page.home.message'),
-    value: '12'
-  }
 ]);
 </script>
 
@@ -48,9 +43,8 @@ const statisticData = computed<StatisticData[]>(() => [
           </div>
           <div class="pl-12px">
             <h3 class="text-18px font-semibold">
-              {{ $t('page.home.greeting', { userName: authStore.userInfo.userName }) }}
+              {{ $t('page.home.weatherDesc') }}
             </h3>
-            <p class="text-#999 leading-30px">{{ $t('page.home.weatherDesc') }}</p>
           </div>
         </div>
       </NGi>

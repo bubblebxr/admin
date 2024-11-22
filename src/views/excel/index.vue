@@ -4,7 +4,7 @@ import { utils, writeFile } from 'xlsx';
 import { useAppStore } from '@/store/modules/app';
 import { useTable } from '@/hooks/common/table';
 import { fetchGetUserList } from '@/service/api';
-import { enableStatusRecord, userGenderRecord } from '@/constants/business';
+import { StatusRecord, userTypeRecord } from '@/constants/business';
 import { $t } from '@/locales';
 
 const appStore = useAppStore();
@@ -38,13 +38,13 @@ const { columns, data, loading } = useTable({
     },
     {
       key: 'userName',
-      title: $t('page.manage.user.userName'),
+      title: $t('page.manage.diary.equipmentName'),
       align: 'center',
       minWidth: 100
     },
     {
       key: 'userGender',
-      title: $t('page.manage.user.userGender'),
+      title: $t('page.manage.diary.type'),
       align: 'center',
       width: 100,
       render: row => {
@@ -52,37 +52,38 @@ const { columns, data, loading } = useTable({
           return null;
         }
 
-        const tagMap: Record<Api.SystemManage.UserGender, NaiveUI.ThemeColor> = {
+        const tagMap: Record<Api.SystemManage.equipmentType, NaiveUI.ThemeColor> = {
           1: 'primary',
-          2: 'error'
+          2: 'error',
+          3:'info',
         };
 
-        const label = $t(userGenderRecord[row.userGender]);
+        const label = $t(userTypeRecord[row.userGender]);
 
         return <NTag type={tagMap[row.userGender]}>{label}</NTag>;
       }
     },
     {
       key: 'nickName',
-      title: $t('page.manage.user.nickName'),
+      title: $t('page.manage.diary.IP'),
       align: 'center',
       minWidth: 100
     },
     {
       key: 'userPhone',
-      title: $t('page.manage.user.userPhone'),
+      title: $t('page.manage.diary.detectTime'),
       align: 'center',
       width: 120
     },
     {
       key: 'userEmail',
-      title: $t('page.manage.user.userEmail'),
+      title: $t('page.manage.diary.location'),
       align: 'center',
       minWidth: 200
     },
     {
       key: 'status',
-      title: $t('page.manage.user.userStatus'),
+      title: $t('page.manage.diary.Status'),
       align: 'center',
       width: 100,
       render: row => {
@@ -95,7 +96,7 @@ const { columns, data, loading } = useTable({
           2: 'warning'
         };
 
-        const label = $t(enableStatusRecord[row.status]);
+        const label = $t(StatusRecord[row.status]);
 
         return <NTag type={tagMap[row.status]}>{label}</NTag>;
       }
@@ -122,7 +123,7 @@ function exportExcel() {
 
   utils.book_append_sheet(workBook, workSheet, '用户列表');
 
-  writeFile(workBook, '用户数据.xlsx');
+  writeFile(workBook, '监测日志.xlsx');
 }
 
 function getTableValue(
@@ -144,11 +145,11 @@ function getTableValue(
   }
 
   if (key === 'status') {
-    return (item.status && $t(enableStatusRecord[item.status])) || null;
+    return (item.status && $t(StatusRecord[item.status])) || null;
   }
 
   if (key === 'userGender') {
-    return (item.userGender && $t(userGenderRecord[item.userGender])) || null;
+    return (item.userGender && $t(userTypeRecord[item.userGender])) || null;
   }
 
   return item[key];
@@ -167,7 +168,8 @@ function isTableColumnHasTitle<T>(column: NaiveUI.TableColumn<T>): column is Nai
 
 <template>
   <div class="min-h-500px flex-col-stretch gap-16px overflow-hidden lt-sm:overflow-auto">
-    <NCard title="Excel导出" :bordered="false" size="small" class="sm:flex-1-hidden card-wrapper">
+    <NCard :title="$t('page.manage.diary.title') " :bordered="false" size="small" class="sm:flex-1-hidden card-wrapper"
+      style="text-align: center;">
       <template #header-extra>
         <NSpace align="end" wrap justify="end" class="lt-sm:w-200px">
           <NButton size="small" ghost type="primary" @click="exportExcel">
@@ -179,19 +181,9 @@ function isTableColumnHasTitle<T>(column: NaiveUI.TableColumn<T>): column is Nai
         </NSpace>
       </template>
 
-      <NDataTable
-        :columns="columns"
-        :data="data"
-        size="small"
-        :flex-height="!appStore.isMobile"
-        :scroll-x="962"
-        :loading="loading"
-        remote
-        :row-key="row => row.id"
-        :pagination="false"
-        :virtual-scroll="true"
-        class="sm:h-full"
-      />
+      <NDataTable :columns="columns" :data="data" size="small" :flex-height="!appStore.isMobile" :scroll-x="962"
+        :loading="loading" remote :row-key="row => row.id" :pagination="false" :virtual-scroll="true"
+        class="sm:h-full" />
     </NCard>
   </div>
 </template>
